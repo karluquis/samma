@@ -67,8 +67,8 @@ export function LandingPageComponent() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#8B4A3B] text-[#F5E6D3] font-serif">
-      <header className="px-4 lg:px-6 h-14 flex items-center border-b border-[#F5E6D3]/20">
+  <div className="flex flex-col min-h-screen bg-[#8B4A3B] text-[#F5E6D3]">      
+    <header className="px-4 lg:px-6 h-14 flex items-center border-b border-[#F5E6D3]/20">
         <Link className="flex items-center justify-center" href="#">
           <span className="text-2xl font-normal tracking-wide">SAMMA</span>
         </Link>
@@ -99,7 +99,7 @@ export function LandingPageComponent() {
           <div className="absolute inset-0 bg-[#8B4A3B]/60 flex items-center justify-center">
             <div className="text-center space-y-4">
               <h1 className="text-4xl md:text-6xl font-normal tracking-wide">
-                Find Your Center at Samma
+                Find Your Center at SAMMA
               </h1>
               <p className="text-xl md:text-2xl font-light max-w-2xl mx-auto">
                 A sanctuary for mindfulness and self-discovery
