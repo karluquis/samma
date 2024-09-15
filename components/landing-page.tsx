@@ -8,14 +8,23 @@ import Link from "next/link"
 import Image from "next/image"
 
 export function LandingPageComponent() {
-  const [breathePhase, setBreathePhase] = useState('inhale')
+  const [breatheProgress, setBreatheProgress] = useState(0)
 
   useEffect(() => {
+    const animationDuration = 16000 // 8 seconds for a full cycle
+    const animationInterval = 50 // Update every 50ms for smooth animation
+
     const timer = setInterval(() => {
-      setBreathePhase((prev) => (prev === 'inhale' ? 'exhale' : 'inhale'))
-    }, 4000)
+      setBreatheProgress((prev) => (prev + (50 / animationDuration) * 100) % 100)
+    }, animationInterval)
+
     return () => clearInterval(timer)
   }, [])
+
+  const calculateLineHeight = (progress: number): number => {
+    // Use a sine wave to create a smooth, oscillating effect
+    return 50 + Math.sin((progress / 100) * Math.PI * 2) * 40
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-[#8B4A3B] text-[#F5E6D3] font-serif">
@@ -99,16 +108,15 @@ export function LandingPageComponent() {
           <div className="container px-4 md:px-6 mx-auto">
             <h2 className="text-3xl font-normal tracking-wide text-center mb-12">Breathe with Samma</h2>
             <div className="flex flex-col items-center space-y-8">
-              <div 
-                className={`w-32 h-32 rounded-full bg-[#F5E6D3] flex items-center justify-center transition-all duration-4000 ease-in-out ${
-                  breathePhase === 'inhale' ? 'scale-110' : 'scale-100'
-                }`}
-              >
-                <span className="text-[#8B4A3B] text-lg font-normal">{breathePhase === 'inhale' ? 'Inhale' : 'Exhale'}</span>
+              <div className="w-64 h-64 relative">
+                <div 
+                  className="absolute left-1/2 bottom-0 w-4 bg-[#F5E6D3] transform -translate-x-1/2 transition-all duration-300 ease-in-out rounded-full"
+                  style={{ height: `${calculateLineHeight(breatheProgress)}%` }}
+                ></div>
               </div>
               <p className="text-center opacity-80 max-w-md">
-                Take a moment to sync your breath with this gentle animation. 
-                Allow yourself to be present, letting go of thoughts and finding calm in this simple practice.
+                Observe the gentle rise and fall of this line. 
+                Let it guide your breath, bringing you into the present moment.
               </p>
             </div>
           </div>
