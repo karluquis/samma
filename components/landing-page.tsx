@@ -120,7 +120,7 @@ export function LandingPageComponent() {
               <Card className="bg-[#8B4A3B] text-[#F5E6D3] border-none shadow-sm">
                 <CardContent className="p-6">
                   <p className="text-lg mb-4 italic">
-                    "Samma provided a nurturing space for my journey inward. The practices and surroundings allowed me to reconnect with my true self in ways I never imagined possible."
+                    &ldquo;Samma provided a nurturing space for my journey inward. The practices and surroundings allowed me to reconnect with my true self in ways I never imagined possible.&rdquo;
                   </p>
                   <p className="font-light">- Amelia R.</p>
                 </CardContent>
@@ -128,7 +128,7 @@ export function LandingPageComponent() {
               <Card className="bg-[#8B4A3B] text-[#F5E6D3] border-none shadow-sm">
                 <CardContent className="p-6">
                   <p className="text-lg mb-4 italic">
-                    "The serenity of Samma is unmatched. From the mindful practices to the stunning natural beauty, every moment here was an opportunity for growth and peace."
+                    &ldquo;The serenity of Samma is unmatched. From the mindful practices to the stunning natural beauty, every moment here was an opportunity for growth and peace.&rdquo;
                   </p>
                   <p className="font-light">- James L.</p>
                 </CardContent>
