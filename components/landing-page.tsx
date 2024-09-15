@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Feather, Mountain, Sunrise } from "lucide-react"
+import { Feather, Mountain, Sunrise, Calendar } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
 export function LandingPageComponent() {
   const [breatheProgress, setBreatheProgress] = useState(0)
+  const [selectedDay, setSelectedDay] = useState(1)
 
   useEffect(() => {
     const animationDuration = 16000 // 8 seconds for a full cycle
@@ -24,6 +25,45 @@ export function LandingPageComponent() {
   const calculateLineHeight = (progress: number): number => {
     // Use a sine wave to create a smooth, oscillating effect
     return 50 + Math.sin((progress / 100) * Math.PI * 2) * 40
+  }
+
+  const scheduleData: Record<number, Array<{ time: string; activity: string }>> = {
+    1: [
+      { time: '6:00 AM', activity: 'Morning Meditation' },
+      { time: '7:30 AM', activity: 'Yoga Session' },
+      { time: '9:00 AM', activity: 'Breakfast' },
+      { time: '10:30 AM', activity: 'Nature Walk' },
+      { time: '12:30 PM', activity: 'Lunch' },
+      { time: '2:00 PM', activity: 'Mindfulness Workshop' },
+      { time: '4:00 PM', activity: 'Free Time' },
+      { time: '6:00 PM', activity: 'Evening Yoga' },
+      { time: '7:30 PM', activity: 'Dinner' },
+      { time: '9:00 PM', activity: 'Stargazing Meditation' },
+    ],
+    2: [
+      { time: '6:00 AM', activity: 'Sunrise Yoga' },
+      { time: '7:30 AM', activity: 'Meditation Session' },
+      { time: '9:00 AM', activity: 'Breakfast' },
+      { time: '10:30 AM', activity: 'Mindful Art Workshop' },
+      { time: '12:30 PM', activity: 'Lunch' },
+      { time: '2:00 PM', activity: 'Guided Hike' },
+      { time: '4:00 PM', activity: 'Free Time' },
+      { time: '6:00 PM', activity: 'Restorative Yoga' },
+      { time: '7:30 PM', activity: 'Dinner' },
+      { time: '9:00 PM', activity: 'Sound Bath Meditation' },
+    ],
+    3: [
+      { time: '6:00 AM', activity: 'Morning Meditation' },
+      { time: '7:30 AM', activity: 'Vinyasa Flow Yoga' },
+      { time: '9:00 AM', activity: 'Breakfast' },
+      { time: '10:30 AM', activity: 'Journaling Workshop' },
+      { time: '12:30 PM', activity: 'Lunch' },
+      { time: '2:00 PM', activity: 'Breathwork Session' },
+      { time: '4:00 PM', activity: 'Free Time' },
+      { time: '6:00 PM', activity: 'Yin Yoga' },
+      { time: '7:30 PM', activity: 'Farewell Dinner' },
+      { time: '9:00 PM', activity: 'Closing Ceremony' },
+    ],
   }
 
   return (
@@ -123,9 +163,39 @@ export function LandingPageComponent() {
         </section>
         <section className="w-full py-20 bg-[#F5E6D3] text-[#8B4A3B]">
           <div className="container px-4 md:px-6 mx-auto">
+            <h2 className="text-3xl font-normal tracking-wide text-center mb-12">Amarte Schedule</h2>
+            <div className="bg-[#8B4A3B] text-[#F5E6D3] p-6 rounded-lg shadow-lg">
+              <div className="flex justify-center space-x-4 mb-6">
+                {[1, 2, 3].map((day) => (
+                  <Button
+                    key={day}
+                    onClick={() => setSelectedDay(day)}
+                    className={`${selectedDay === day ? 'bg-[#F5E6D3] text-[#8B4A3B]' : 'bg-[#8B4A3B] text-[#F5E6D3]'} hover:bg-[#F5E6D3] hover:text-[#8B4A3B]`}
+                  >
+                    Day {day}
+                  </Button>
+                ))}
+              </div>
+              <h3 className="text-2xl font-normal mb-4">Day {selectedDay} Schedule</h3>
+              <div className="grid gap-4 md:grid-cols-2">
+                {scheduleData[selectedDay].map((item, index) => (
+                  <div key={index} className="flex items-center space-x-4">
+                    <Calendar className="w-6 h-6" />
+                    <div>
+                      <p className="font-semibold">{item.time}</p>
+                      <p>{item.activity}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="w-full py-20 bg-[#8B4A3B] text-[#F5E6D3]">
+          <div className="container px-4 md:px-6 mx-auto">
             <h2 className="text-3xl font-normal tracking-wide text-center mb-12">Voices of Transformation</h2>
             <div className="grid gap-8 md:grid-cols-2">
-              <Card className="bg-[#8B4A3B] text-[#F5E6D3] border-none shadow-sm">
+              <Card className="bg-[#F5E6D3] text-[#8B4A3B] border-none shadow-sm">
                 <CardContent className="p-6">
                   <p className="text-lg mb-4 italic">
                     &ldquo;Samma provided a nurturing space for my journey inward. The practices and surroundings allowed me to reconnect with my true self in ways I never imagined possible.&rdquo;
@@ -133,7 +203,7 @@ export function LandingPageComponent() {
                   <p className="font-light">- Amelia R.</p>
                 </CardContent>
               </Card>
-              <Card className="bg-[#8B4A3B] text-[#F5E6D3] border-none shadow-sm">
+              <Card className="bg-[#F5E6D3] text-[#8B4A3B] border-none shadow-sm">
                 <CardContent className="p-6">
                   <p className="text-lg mb-4 italic">
                     &ldquo;The serenity of Samma is unmatched. From the mindful practices to the stunning natural beauty, every moment here was an opportunity for growth and peace.&rdquo;
@@ -144,14 +214,14 @@ export function LandingPageComponent() {
             </div>
           </div>
         </section>
-        <section className="w-full py-20 bg-[#8B4A3B] text-[#F5E6D3]">
+        <section className="w-full py-20 bg-[#F5E6D3] text-[#8B4A3B]">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center space-y-4 text-center">
               <h2 className="text-3xl font-normal tracking-wide">Begin Your Samma Journey</h2>
               <p className="max-w-[600px] text-xl opacity-80">
                 Open your heart to transformation and peace. Your path to mindfulness starts here.
               </p>
-              <Button asChild size="lg" className="mt-6 bg-[#F5E6D3] text-[#8B4A3B] hover:bg-[#F5E6D3]/90 transition-colors duration-300">
+              <Button asChild size="lg" className="mt-6 bg-[#8B4A3B] text-[#F5E6D3] hover:bg-[#8B4A3B]/90 transition-colors duration-300">
                 <Link href="#">Reserve Your Retreat</Link>
               </Button>
             </div>
