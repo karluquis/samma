@@ -4,7 +4,7 @@ export default function StationsPage() {
   const stations = [
     {
       name: "Sukti",
-      description: "A space for poetic expression and reading. Immerse yourself in literature and share your favorite passages.",
+      description: "A space for poetic expression and reading. Immerse yourself in literature, share your favorite passages, and connect with others through their cherished books.",
       location: "Immersed in the lush gardens",
       activities: "Poetry, reading, book sharing"
     },
@@ -16,9 +16,9 @@ export default function StationsPage() {
     },
     {
       name: "Abhyanga",
-      description: "Experience the ancient Indian holistic healing practice of warm oil massage. A loving act of self-care and rejuvenation.",
+      description: "Experience the ancient Indian holistic healing practice of warm oil self-massage. A loving act of self-care and rejuvenation where you massage your own body.",
       location: "By the spa area",
-      activities: "5-minute massages with essential oils"
+      activities: "Self-massage with warm essential oils"
     }
   ]
 
