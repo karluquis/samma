@@ -172,7 +172,7 @@ export function LandingPageComponent() {
                   </svg>
                   <h3 className="text-xl font-normal text-center">Natural Harmony</h3>
                   <p className="text-center opacity-80">
-                    Immerse in the serenity of our mountain sanctuary and forest trails.
+                    Immerse in the serenity of our lush gardens and serene landscapes.
                   </p>
                 </CardContent>
               </Card>
