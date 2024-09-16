@@ -12,6 +12,8 @@ export function LandingPageComponent() {
   const [breatheProgress, setBreatheProgress] = useState(0)
   const [attendeeName, setAttendeeName] = useState('')
   const [attendeeRoom, setAttendeeRoom] = useState('')
+  const [showJulianPhoto, setShowJulianPhoto] = useState(false)
+
 
   useEffect(() => {
     const animationDuration = 16000 // 8 seconds for a full cycle
@@ -141,7 +143,7 @@ export function LandingPageComponent() {
         </section>
         <section className="w-full py-12 md:py-20 bg-[#8B4A3B] text-[#F5E6D3]">
           <div className="container px-4 md:px-6 mx-auto">
-            <h2 className="text-2xl md:text-3xl font-normal tracking-wide text-center mb-8 md:mb-12">Breathe with Samma</h2>
+            <h2 className="text-2xl md:text-3xl font-normal tracking-wide text-center mb-8 md:mb-12">Breathe with SAMMA</h2>
             <div className="flex flex-col items-center space-y-6 md:space-y-8">
               <div className="w-48 h-48 md:w-64 md:h-64 relative">
                 <div 
@@ -173,7 +175,10 @@ export function LandingPageComponent() {
                   <p className="text-sm md:text-base font-light">- Sofia C.</p>
                 </CardContent>
               </Card>
-              <Card className="bg-[#F5E6D3] text-[#8B4A3B] border-none shadow-sm">
+              <Card 
+                className="bg-[#F5E6D3] text-[#8B4A3B] border-none shadow-sm cursor-pointer" 
+                onClick={() => setShowJulianPhoto(!showJulianPhoto)}
+              >
                 <CardContent className="p-4 md:p-6">
                   <p className="text-base md:text-lg mb-3 md:mb-4 italic">
                     &ldquo;The serenity of Samma is unmatched. From the mindful practices to the stunning natural beauty, every moment here was an opportunity for growth and peace.&rdquo;
@@ -182,6 +187,17 @@ export function LandingPageComponent() {
                 </CardContent>
               </Card>
             </div>
+            {showJulianPhoto && (
+              <div className="mt-6 md:mt-8 relative w-full max-w-md mx-auto aspect-square">
+                <Image
+                  src="/julian.png"
+                  alt="Julian"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-lg"
+                />
+              </div>
+            )}
           </div>
         </section>
         <section className="w-full py-12 md:py-20 bg-[#F5E6D3] text-[#8B4A3B]">
