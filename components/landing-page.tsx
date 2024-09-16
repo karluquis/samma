@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Feather, Mountain, Sunrise, Calendar } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
