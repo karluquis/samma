@@ -4,16 +4,14 @@ import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
-import { Schedule } from '@/components/schedule'  // Update this import
-import Image from 'next/image'  // Add this import at the top of the file
-
+import { Schedule } from '@/components/schedule'
+import Image from 'next/image'
+import { GuestRoomSearch } from '@/components/guest-search'
 
 export function LandingPageComponent() {
   const [breatheProgress, setBreatheProgress] = useState(0)
-  const [selectedDay, setSelectedDay] = useState('Thursday')
   const [attendeeName, setAttendeeName] = useState('')
-  const [inputName, setInputName] = useState('')
-  const [matchingNames, setMatchingNames] = useState<string[]>([])
+  const [attendeeRoom, setAttendeeRoom] = useState('')
 
   useEffect(() => {
     const animationDuration = 16000 // 8 seconds for a full cycle
@@ -38,33 +36,9 @@ export function LandingPageComponent() {
     return 50 + Math.sin((progress / 100) * Math.PI * 2) * 40
   }
 
-  const guestInfo = {
-    'Karla Sanchez': { roomNumber: 'La Chambre de Grazielle' },
-    'Isabella Van Heuven': { roomNumber: 'La Chambre du Nid d\'Aigle' },
-    'Daniela Cervantes': { roomNumber: 'La Chambre des Rêves' },
-    'Daniel Serra': { roomNumber: 'La Chambre du Poète' },
-    'Sofia Mendoza': { roomNumber: 'La Chambre Enchantée' },
-  }
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputName(e.target.value);
-    const matches = Object.keys(guestInfo).filter(name => 
-      name.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    setMatchingNames(matches);
-  }
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (matchingNames.length === 1) {
-      setAttendeeName(matchingNames[0]);
-    }
-  }
-
-  const handleNameSelect = (name: string) => {
+  const handleGuestFound = (name: string, roomNumber: string) => {
     setAttendeeName(name);
-    setInputName(name);
-    setMatchingNames([]);
+    setAttendeeRoom(roomNumber);
   }
 
   return (
@@ -107,44 +81,18 @@ export function LandingPageComponent() {
             </div>
           </div>
         </section>
-        {attendeeName && guestInfo[attendeeName as keyof typeof guestInfo] ? (
+        {attendeeName && attendeeRoom ? (
           <section className="w-full py-10 bg-[#8B4A3B] text-[#F5E6D3]">
             <div className="container px-4 md:px-6 mx-auto">
               <h2 className="text-3xl font-normal tracking-wide text-center mb-6">Welcome, {attendeeName}!</h2>
-              <p className="text-xl text-center">Your room is: {guestInfo[attendeeName as keyof typeof guestInfo].roomNumber}</p>
+              <p className="text-xl text-center">Your room is: {attendeeRoom}</p>
             </div>
           </section>
         ) : (
           <section className="w-full py-10 bg-[#8B4A3B] text-[#F5E6D3]">
             <div className="container px-4 md:px-6 mx-auto">
               <h2 className="text-3xl font-normal tracking-wide text-center mb-6">Find Your Room</h2>
-              <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4">
-                <div className="relative w-full max-w-md">
-                  <input
-                    type="text"
-                    value={inputName}
-                    onChange={handleInputChange}
-                    placeholder="Enter your name"
-                    className="w-full px-4 py-2 bg-[#F5E6D3] text-[#8B4A3B] rounded"
-                  />
-                  {matchingNames.length > 0 && (
-                    <ul className="absolute z-10 w-full mt-1 bg-[#F5E6D3] text-[#8B4A3B] rounded shadow-lg">
-                      {matchingNames.map((name, index) => (
-                        <li 
-                          key={index} 
-                          className="px-4 py-2 cursor-pointer hover:bg-[#8B4A3B] hover:text-[#F5E6D3]"
-                          onClick={() => handleNameSelect(name)}
-                        >
-                          {name}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-                <Button type="submit" className="bg-[#F5E6D3] text-[#8B4A3B] hover:bg-[#F5E6D3]/90">
-                  See Your Room
-                </Button>
-              </form>
+              <GuestRoomSearch onGuestFound={handleGuestFound} />
             </div>
           </section>
         )}
