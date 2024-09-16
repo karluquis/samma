@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 
 const guton = localFont({
   src: [
@@ -19,8 +21,8 @@ const guton = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Samma",
-  description: "Samma - Quiet the Mind, Open the Heart ",
+  title: "SAMMA",
+  description: "SAMMA - Quiet the Mind, Open the Heart ",
 };
 
 export default function RootLayout({
@@ -31,9 +33,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${guton.variable} antialiased`}
+        className={`${guton.variable} antialiased flex flex-col min-h-screen bg-[#8B4A3B] text-[#F5E6D3]`}
       >
-        {children}
+        <Header />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
