@@ -160,7 +160,10 @@ export function LandingPageComponent() {
             <div className="grid gap-10 md:grid-cols-3">
               <Card className="bg-[#8B4A3B] text-[#F5E6D3] border-none shadow-sm">
                 <CardContent className="flex flex-col items-center space-y-4 p-6">
-                  <Feather className="w-12 h-12" />
+                  <svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 10A40 40 0 1 0 50 90A40 40 0 0 1 50 10z" 
+                          stroke="currentColor" stroke-width="2" fill="currentColor"/>
+                  </svg>
                   <h3 className="text-xl font-normal text-center">Mindful Practices</h3>
                   <p className="text-center opacity-80">
                     Cultivate presence through guided meditation and gentle yoga flows.
@@ -169,7 +172,10 @@ export function LandingPageComponent() {
               </Card>
               <Card className="bg-[#8B4A3B] text-[#F5E6D3] border-none shadow-sm">
                 <CardContent className="flex flex-col items-center space-y-4 p-6">
-                  <Mountain className="w-12 h-12" />
+                  <svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="40" 
+                            stroke="currentColor" stroke-width="2" fill="none"/>
+                  </svg>
                   <h3 className="text-xl font-normal text-center">Natural Harmony</h3>
                   <p className="text-center opacity-80">
                     Immerse in the serenity of our mountain sanctuary and forest trails.
@@ -178,7 +184,10 @@ export function LandingPageComponent() {
               </Card>
               <Card className="bg-[#8B4A3B] text-[#F5E6D3] border-none shadow-sm">
                 <CardContent className="flex flex-col items-center space-y-4 p-6">
-                  <Sunrise className="w-12 h-12" />
+                  <svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 10A40 40 0 1 1 50 90A40 40 0 0 0 50 10z" 
+                          stroke="currentColor" stroke-width="2" fill="currentColor"/>
+                  </svg>
                   <h3 className="text-xl font-normal text-center">Inner Awakening</h3>
                   <p className="text-center opacity-80">
                     Discover your true self through transformative workshops and practices.
