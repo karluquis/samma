@@ -20,6 +20,9 @@ export function Header() {
         <Link className="text-sm hover:text-[#F5E6D3]/80 transition-colors" href="/#schedule">
           Schedule
         </Link>
+        <Link className="text-sm hover:text-[#F5E6D3]/80 transition-colors" href="/menu">
+          Menu
+        </Link>
       </nav>
     </header>
   )

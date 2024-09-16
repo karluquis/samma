@@ -5,13 +5,16 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Calendar } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
+import { Schedule } from '@/components/schedule'  // Update this import
+import Image from 'next/image'  // Add this import at the top of the file
+
 
 export function LandingPageComponent() {
   const [breatheProgress, setBreatheProgress] = useState(0)
   const [selectedDay, setSelectedDay] = useState('Thursday')
   const [attendeeName, setAttendeeName] = useState('')
   const [inputName, setInputName] = useState('')
+  const [matchingNames, setMatchingNames] = useState<string[]>([])
 
   useEffect(() => {
     const animationDuration = 16000 // 8 seconds for a full cycle
@@ -36,56 +39,33 @@ export function LandingPageComponent() {
     return 50 + Math.sin((progress / 100) * Math.PI * 2) * 40
   }
 
-  const scheduleData = {
-    "Thursday": [
-      { time: '17:00', activity: 'Arrival' },
-      { time: '17:30', activity: 'Early Dinner' },
-      { time: '19:00', activity: 'Candlelight Yoga / Welcome Circle' },
-      { time: '20:00', activity: 'Snack' }
-    ],
-    "Friday (Chakras: Root, Sacral, Solar Plexus)": [
-      { time: '06:30', activity: 'Meditation' },
-      { time: '07:00', activity: 'Yoga Class' },
-      { time: '09:00', activity: 'Breakfast, Journaling' },
-      { time: '12:00', activity: 'Sound Healing with optional Microdosing' },
-      { time: '14:30', activity: 'Lunch' },
-      { time: '17:00', activity: 'Artistic Yoga Class' },
-      { time: '19:00', activity: 'Dinner' }
-    ],
-    "Saturday (Chakras: Heart, Throat, Third Eye)": [
-      { time: '06:30', activity: 'Walking meditation' },
-      { time: '07:00', activity: 'Yoga Class' },
-      { time: '09:00', activity: 'Breakfast, Journaling' },
-      { time: '12:00', activity: 'Breathwork + Artistic Restoration' },
-      { time: '14:30', activity: 'Lunch' },
-      { time: '17:30', activity: 'Cacao Ceremony' },
-      { time: '19:00', activity: 'Ecstatic Dance' },
-      { time: '20:00', activity: 'Dinner' },
-      { time: '21:00', activity: 'Closing Ceremony' }
-    ],
-    "Sunday (Chakra: Crown)": [
-      { time: '06:30', activity: 'Meditation' },
-      { time: '07:00', activity: 'Restorative Yoga Class' },
-      { time: '09:00', activity: 'Breakfast, Journaling' },
-      { time: '12:00', activity: 'Departure' }
-    ]
-  }
-
   const guestInfo = {
-    'Alice': { roomNumber: '101' },
-    'Bob': { roomNumber: '102' },
-    'Charlie': { roomNumber: '103' },
-    'Diana': { roomNumber: '104' },
-    'Ethan': { roomNumber: '105' },
+    'Karla Sanchez': { roomNumber: 'La Chambre de Grazielle' },
+    'Isabella Van Heuven': { roomNumber: 'La Chambre du Nid d\'Aigle' },
+    'Daniela Cervantes': { roomNumber: 'La Chambre des Rêves' },
+    'Daniel Serra': { roomNumber: 'La Chambre du Poète' },
+    'Sofia Mendoza': { roomNumber: 'La Chambre Enchantée' },
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputName(e.target.value);
+    const matches = Object.keys(guestInfo).filter(name => 
+      name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setMatchingNames(matches);
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setAttendeeName(inputName);
+    if (matchingNames.length === 1) {
+      setAttendeeName(matchingNames[0]);
+    }
+  }
+
+  const handleNameSelect = (name: string) => {
+    setAttendeeName(name);
+    setInputName(name);
+    setMatchingNames([]);
   }
 
   return (
@@ -132,7 +112,7 @@ export function LandingPageComponent() {
           <section className="w-full py-10 bg-[#8B4A3B] text-[#F5E6D3]">
             <div className="container px-4 md:px-6 mx-auto">
               <h2 className="text-3xl font-normal tracking-wide text-center mb-6">Welcome, {attendeeName}!</h2>
-              <p className="text-xl text-center">Your room number is: {guestInfo[attendeeName as keyof typeof guestInfo].roomNumber}</p>
+              <p className="text-xl text-center">Your room is: {guestInfo[attendeeName as keyof typeof guestInfo].roomNumber}</p>
             </div>
           </section>
         ) : (
@@ -140,13 +120,28 @@ export function LandingPageComponent() {
             <div className="container px-4 md:px-6 mx-auto">
               <h2 className="text-3xl font-normal tracking-wide text-center mb-6">Find Your Room</h2>
               <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4">
-                <input
-                  type="text"
-                  value={inputName}
-                  onChange={handleInputChange}
-                  placeholder="Enter your name"
-                  className="px-4 py-2 bg-[#F5E6D3] text-[#8B4A3B] rounded"
-                />
+                <div className="relative w-full max-w-md">
+                  <input
+                    type="text"
+                    value={inputName}
+                    onChange={handleInputChange}
+                    placeholder="Enter your name"
+                    className="w-full px-4 py-2 bg-[#F5E6D3] text-[#8B4A3B] rounded"
+                  />
+                  {matchingNames.length > 0 && (
+                    <ul className="absolute z-10 w-full mt-1 bg-[#F5E6D3] text-[#8B4A3B] rounded shadow-lg">
+                      {matchingNames.map((name, index) => (
+                        <li 
+                          key={index} 
+                          className="px-4 py-2 cursor-pointer hover:bg-[#8B4A3B] hover:text-[#F5E6D3]"
+                          onClick={() => handleNameSelect(name)}
+                        >
+                          {name}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
                 <Button type="submit" className="bg-[#F5E6D3] text-[#8B4A3B] hover:bg-[#F5E6D3]/90">
                   See Your Room
                 </Button>
@@ -216,32 +211,7 @@ export function LandingPageComponent() {
         </section>
         <section id="schedule" className="w-full py-20 bg-[#F5E6D3] text-[#8B4A3B]">
           <div className="container px-4 md:px-6 mx-auto">
-            <h2 className="text-3xl font-normal tracking-wide text-center mb-12">Amarte Retreat Schedule</h2>
-            <div className="bg-[#8B4A3B] text-[#F5E6D3] p-6 rounded-lg shadow-lg">
-              <div className="flex justify-center space-x-4 mb-6">
-                {Object.keys(scheduleData).map((day) => (
-                  <Button
-                    key={day}
-                    onClick={() => setSelectedDay(day)}
-                    className={`${selectedDay === day ? 'bg-[#F5E6D3] text-[#8B4A3B]' : 'bg-[#8B4A3B] text-[#F5E6D3]'} hover:bg-[#F5E6D3] hover:text-[#8B4A3B]`}
-                  >
-                    {day.split(' ')[0]}
-                  </Button>
-                ))}
-              </div>
-              <h3 className="text-2xl font-normal mb-4">{selectedDay}</h3>
-              <div className="grid gap-4 md:grid-cols-2">
-                {scheduleData[selectedDay as keyof typeof scheduleData].map((item, index) => (
-                  <div key={index} className="flex items-center space-x-4">
-                    <Calendar className="w-6 h-6" />
-                    <div>
-                      <p className="font-semibold">{item.time}</p>
-                      <p>{item.activity}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <Schedule />
           </div>
         </section>
         <section className="w-full py-20 bg-[#8B4A3B] text-[#F5E6D3]">
