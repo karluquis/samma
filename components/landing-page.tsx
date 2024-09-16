@@ -7,13 +7,19 @@ import Link from "next/link"
 import { Schedule } from '@/components/schedule'
 import Image from 'next/image'
 import { GuestRoomSearch } from '@/components/guest-search'
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase client
+const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
+
 
 export function LandingPageComponent() {
   const [breatheProgress, setBreatheProgress] = useState(0)
   const [attendeeName, setAttendeeName] = useState('')
   const [attendeeRoom, setAttendeeRoom] = useState('')
-  const [showJulianPhoto, setShowJulianPhoto] = useState(false)
+  const [attendeeId, setAttendeeId] = useState('')
 
+  const [showJulianPhoto, setShowJulianPhoto] = useState(false)
 
   useEffect(() => {
     const animationDuration = 16000 // 8 seconds for a full cycle
@@ -23,11 +29,12 @@ export function LandingPageComponent() {
       setBreatheProgress((prev) => (prev + (50 / animationDuration) * 100) % 100)
     }, animationInterval)
 
-    // Get attendee name from query parameter
+    // Get attendee id from query parameter
     const urlParams = new URLSearchParams(window.location.search);
-    const name = urlParams.get('name');
-    if (name) {
-      setAttendeeName(name);
+    const id = urlParams.get('id');
+    if (id) {
+      setAttendeeId(id);
+      fetchGuestInfo(id);
     }
 
     return () => clearInterval(timer)
@@ -36,6 +43,21 @@ export function LandingPageComponent() {
   const calculateLineHeight = (progress: number): number => {
     // Use a sine wave to create a smooth, oscillating effect
     return 50 + Math.sin((progress / 100) * Math.PI * 2) * 40
+  }
+
+  const fetchGuestInfo = async (id: string) => {
+    const { data, error } = await supabase
+      .from('yoga_retreat_guests')
+      .select('guest_name, hotel_room')
+      .eq('guest_id', id)
+      .single();
+
+    if (error) {
+      console.error('Error fetching guest info:', error);
+    } else if (data) {
+      setAttendeeName(data.guest_name);
+      setAttendeeRoom(data.hotel_room);
+    }
   }
 
   const handleGuestFound = (name: string, roomNumber: string) => {

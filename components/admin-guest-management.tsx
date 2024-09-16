@@ -67,6 +67,11 @@ export function AdminGuestManagement() {
     }
   };
 
+  const getGuestUrl = (guestId: number) => {
+    const rootUrl = window.location.origin;
+    return `${rootUrl}?id=${guestId}`;
+  };
+
   return (
     <div className="container mx-auto p-4 md:p-6 space-y-6 md:space-y-8">
       <h2 className="text-2xl md:text-3xl font-semibold mb-4 md:mb-6">Guest Management</h2>
@@ -98,6 +103,7 @@ export function AdminGuestManagement() {
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Room</TableHead>
+              <TableHead>Guest URL</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -106,6 +112,18 @@ export function AdminGuestManagement() {
               <TableRow key={guest.guest_id}>
                 <TableCell className="text-black">{guest.guest_name}</TableCell>
                 <TableCell className="text-black">{guest.hotel_room}</TableCell>
+                <TableCell className="text-black">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm truncate flex-grow">{getGuestUrl(guest.guest_id)}</span>
+                    <Button
+                      onClick={() => navigator.clipboard.writeText(getGuestUrl(guest.guest_id))}
+                      size="sm"
+                      variant="outline"
+                    >
+                      Copy
+                    </Button>
+                  </div>
+                </TableCell>
                 <TableCell>
                   <Button 
                     onClick={() => handleDeleteGuest(guest.guest_id)} 
