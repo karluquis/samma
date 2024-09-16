@@ -15,8 +15,8 @@ export function Footer() {
               className="h-8 w-auto mr-4"
             />
           </Link>
-          <p className="text-sm opacity-80">© 2024 Samma Yoga Retreat. All rights reserved.</p>
         </div>
+        <p className="text-sm opacity-80">© 2024 Samma</p>
       </div>
     </footer>
   )
