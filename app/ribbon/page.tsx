@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { Ribbon, Dog } from 'lucide-react';
 
 export default function RibbonPage() {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -41,7 +42,11 @@ export default function RibbonPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#8B4A3B] text-[#F5E6D3] p-4">
-      <h1 className="text-3xl font-semibold mb-6 text-center">For Ribbon and Oso</h1>
+      <h1 className="text-3xl font-semibold mb-6 text-center flex items-center justify-center">
+        <Ribbon className="w-8 h-8 mr-2" />
+        <span className="mx-2">&</span>
+        <Dog className="w-8 h-8 ml-2" />
+      </h1>
       
       <blockquote className="text-xl italic mb-8 text-center max-w-md px-4 py-3 bg-[#F5E6D3]/10 rounded-lg">
         <p className="mb-2">"Dogs are not our whole life, but they make our lives whole."</p>

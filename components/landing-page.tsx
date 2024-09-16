@@ -7,14 +7,14 @@ import Link from "next/link"
 import { Schedule } from '@/components/schedule'
 import Image from 'next/image'
 import { GuestRoomSearch } from '@/components/guest-search'
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js'
+import { BreathingSection } from '@/components/breathing-section'
 
 // Initialize Supabase client
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
 
 
 export function LandingPageComponent() {
-  const [breatheProgress, setBreatheProgress] = useState(0)
   const [attendeeName, setAttendeeName] = useState('')
   const [attendeeRoom, setAttendeeRoom] = useState('')
   const [attendeeId, setAttendeeId] = useState('')
@@ -22,13 +22,6 @@ export function LandingPageComponent() {
   const [showJulianPhoto, setShowJulianPhoto] = useState(false)
 
   useEffect(() => {
-    const animationDuration = 16000 // 8 seconds for a full cycle
-    const animationInterval = 50 // Update every 50ms for smooth animation
-
-    const timer = setInterval(() => {
-      setBreatheProgress((prev) => (prev + (50 / animationDuration) * 100) % 100)
-    }, animationInterval)
-
     // Get attendee id from query parameter
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
@@ -36,14 +29,7 @@ export function LandingPageComponent() {
       setAttendeeId(id);
       fetchGuestInfo(id);
     }
-
-    return () => clearInterval(timer)
   }, [])
-
-  const calculateLineHeight = (progress: number): number => {
-    // Use a sine wave to create a smooth, oscillating effect
-    return 50 + Math.sin((progress / 100) * Math.PI * 2) * 40
-  }
 
   const fetchGuestInfo = async (id: string) => {
     const { data, error } = await supabase
@@ -163,23 +149,7 @@ export function LandingPageComponent() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-20 bg-[#8B4A3B] text-[#F5E6D3]">
-          <div className="container px-4 md:px-6 mx-auto">
-            <h2 className="text-2xl md:text-3xl font-normal tracking-wide text-center mb-8 md:mb-12">Breathe with SAMMA</h2>
-            <div className="flex flex-col items-center space-y-6 md:space-y-8">
-              <div className="w-48 h-48 md:w-64 md:h-64 relative">
-                <div 
-                  className="absolute left-1/2 bottom-0 w-3 md:w-4 bg-[#F5E6D3] transform -translate-x-1/2 transition-all duration-300 ease-in-out rounded-full"
-                  style={{ height: `${calculateLineHeight(breatheProgress)}%` }}
-                ></div>
-              </div>
-              <p className="text-sm md:text-base text-center opacity-80 max-w-md">
-                Observe the gentle rise and fall of this line. 
-                Let it guide your breath, bringing you into the present moment.
-              </p>
-            </div>
-          </div>
-        </section>
+        <BreathingSection />
         <section id="schedule" className="w-full py-12 md:py-20 bg-[#F5E6D3] text-[#8B4A3B]">
           <div className="container px-4 md:px-6 mx-auto">
             <Schedule />
@@ -187,39 +157,33 @@ export function LandingPageComponent() {
         </section>
         <section className="w-full py-12 md:py-20 bg-[#8B4A3B] text-[#F5E6D3]">
           <div className="container px-4 md:px-6 mx-auto">
-            <h2 className="text-2xl md:text-3xl font-normal tracking-wide text-center mb-8 md:mb-12">Voices of Transformation</h2>
-            <div className="grid gap-6 md:gap-8 md:grid-cols-2">
+            <h2 className="text-2xl md:text-3xl font-normal tracking-wide text-center mb-8 md:mb-12">Voices of Wisdom</h2>
+            <div className="grid gap-6 md:gap-8 md:grid-cols-3">
               <Card className="bg-[#F5E6D3] text-[#8B4A3B] border-none shadow-sm">
-                <CardContent className="p-4 md:p-6">
+                <CardContent className="p-4 md:p-6 flex flex-col justify-between h-full">
                   <p className="text-base md:text-lg mb-3 md:mb-4 italic">
-                    &ldquo;Samma provided a nurturing space for my journey inward. The practices and surroundings allowed me to reconnect with my true self in ways I never imagined possible.&rdquo;
+                    &ldquo;Art enables us to find ourselves and lose ourselves at the same time.&rdquo;
                   </p>
-                  <p className="text-sm md:text-base font-light">- Sofia C.</p>
+                  <p className="text-sm md:text-base font-light text-right mt-auto">— Thomas Merton</p>
                 </CardContent>
               </Card>
-              <Card 
-                className="bg-[#F5E6D3] text-[#8B4A3B] border-none shadow-sm cursor-pointer" 
-                onClick={() => setShowJulianPhoto(!showJulianPhoto)}
-              >
-                <CardContent className="p-4 md:p-6">
+              <Card className="bg-[#F5E6D3] text-[#8B4A3B] border-none shadow-sm">
+                <CardContent className="p-4 md:p-6 flex flex-col justify-between h-full">
                   <p className="text-base md:text-lg mb-3 md:mb-4 italic">
-                    &ldquo;The serenity of Samma is unmatched. From the mindful practices to the stunning natural beauty, every moment here was an opportunity for growth and peace.&rdquo;
+                    &ldquo;Do not feel lonely, the entire universe is inside you. Stop acting so small. You are the universe in ecstatic motion. Set your life on fire.&rdquo;
                   </p>
-                  <p className="text-sm md:text-base font-light">- Julian S.</p>
+                  <p className="text-sm md:text-base font-light text-right mt-auto">— Rumi</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-[#F5E6D3] text-[#8B4A3B] border-none shadow-sm">
+                <CardContent className="p-4 md:p-6 flex flex-col justify-between h-full">
+                  <p className="text-base md:text-lg mb-3 md:mb-4 italic">
+                    &ldquo;In the midst of movement and chaos, keep stillness inside of you.&rdquo;
+                  </p>
+                  <p className="text-sm md:text-base font-light text-right mt-auto">— Deepak Chopra</p>
                 </CardContent>
               </Card>
             </div>
-            {showJulianPhoto && (
-              <div className="mt-6 md:mt-8 relative w-full max-w-md mx-auto aspect-square">
-                <Image
-                  src="/julian.png"
-                  alt="Julian"
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-lg"
-                />
-              </div>
-            )}
           </div>
         </section>
         <section className="w-full py-12 md:py-20 bg-[#F5E6D3] text-[#8B4A3B]">

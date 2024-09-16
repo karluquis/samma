@@ -73,27 +73,27 @@ export function AdminGuestManagement() {
   };
 
   return (
-    <div className="container mx-auto p-4 md:p-6 space-y-6 md:space-y-8">
-      <h2 className="text-2xl md:text-3xl font-semibold mb-4 md:mb-6">Guest Management</h2>
+    <div className="container mx-auto p-4 space-y-6">
+      <h2 className="text-2xl font-semibold mb-4">Guest Management</h2>
       
-      <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
-        <h3 className="text-lg md:text-xl font-medium mb-3 md:mb-4 text-gray-800">Add New Guest</h3>
-        <div className="flex flex-col space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+      <div className="bg-white p-4 rounded-lg shadow-md">
+        <h3 className="text-lg font-medium mb-3 text-gray-800">Add New Guest</h3>
+        <div className="flex flex-col space-y-3">
           <Input
             type="text"
             placeholder="Guest Name"
             value={newGuest.guest_name}
             onChange={(e) => setNewGuest({ ...newGuest, guest_name: e.target.value })}
-            className="w-full md:w-auto flex-grow text-gray-800 border-gray-800"
+            className="w-full text-gray-800 border-gray-800"
           />
           <Input
             type="text"
             placeholder="Room Number or Name"
             value={newGuest.hotel_room}
             onChange={(e) => setNewGuest({ ...newGuest, hotel_room: e.target.value })}
-            className="w-full md:w-auto flex-grow text-gray-800 border-gray-800"
+            className="w-full text-gray-800 border-gray-800"
           />
-          <Button onClick={handleAddGuest} className="w-full md:w-auto px-6 bg-gray-800 text-white hover:bg-gray-700">Add Guest</Button>
+          <Button onClick={handleAddGuest} className="w-full bg-gray-800 text-white hover:bg-gray-700">Add Guest</Button>
         </div>
       </div>
 
@@ -114,13 +114,19 @@ export function AdminGuestManagement() {
                 <TableCell className="text-black">{guest.hotel_room}</TableCell>
                 <TableCell className="text-black">
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm truncate flex-grow">{getGuestUrl(guest.guest_id)}</span>
+                    <span className="text-sm truncate">
+                      {getGuestUrl(guest.guest_id).split('?')[1]}
+                    </span>
                     <Button
                       onClick={() => navigator.clipboard.writeText(getGuestUrl(guest.guest_id))}
-                      size="sm"
+                      size="icon"
                       variant="outline"
+                      className="h-6 w-6"
                     >
-                      Copy
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                        <path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z" />
+                        <path d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z" />
+                      </svg>
                     </Button>
                   </div>
                 </TableCell>
@@ -129,6 +135,7 @@ export function AdminGuestManagement() {
                     onClick={() => handleDeleteGuest(guest.guest_id)} 
                     variant="destructive"
                     size="sm"
+                    className="w-full"
                   >
                     Delete
                   </Button>
