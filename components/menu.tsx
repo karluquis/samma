@@ -6,78 +6,100 @@ import { Card, CardContent } from "@/components/ui/card"
 
 const menuData = {
   "Thursday": {
-    "Dinner": {
+    "Snack de bienvenida": {
       "Main": [
-        "Green Salad",
-        "White Fish with Chiltepín",
-        "Handmade Tortillas",
-        "Rice",
-        "Beans",
-        "Avocado and Salsas"
-      ],
-      "Dessert": ["Cacao Mousse"]
+        "Crudités y hummus de betabel"
+      ]
+    },
+    "Comida": {
+      "Main": [
+        "Crema de calabaza",
+        "Ensalada del huerto",
+        "Pollo con flores de cilantro",
+        "Tabulé de quinoa",
+        "Zanahorias al tahini"
+      ]
+    },
+    "Cena": {
+      "Main": [
+        "Sopa de jitomate",
+        "Mix de tostas: tinga de zanahoria, pimientos con elotes y setas",
+        "Ensalada de espinacas y nueces"
+      ]
     }
   },
   "Friday": {
-    "Breakfast": {
+    "Abre ojos": {
       "Main": [
-        "Fruit",
-        "House Bread with Butter & Jam",
-        "Three types of Quesadillas: Huitlacoche, Flor de Calabaza, Oaxaca Cheese",
-        "Avocado and Salsas"
+        "Fruta con yogurt, granola y miel orgánica",
+        "Café, té y jugo verde del huerto"
       ]
     },
-    "Lunch": {
+    "Desayuno": {
       "Main": [
-        "Cold Avocado Soup",
-        "Mediterranean Salad",
-        "Lentil Meatballs in Tomato Sauce",
-        "Handmade Tortillas",
-        "Rice"
-      ],
-      "Dessert": ["Seasonal Ice Cream"]
+        "Huevos con brocolini",
+        "Pan tostado",
+        "Puddin de chía con frutos rojos"
+      ]
     },
-    "Dinner": {
+    "Comida": {
       "Main": [
-        "Ratatouille",
-        "Lemon Pasta (With or Without Shrimp)"
+        "Crema de zanahoria",
+        "Ensalada del huerto",
+        "Cecina de Valle",
+        "Papas al romero"
+      ]
+    },
+    "Cena": {
+      "Main": [
+        "Sopa de chayote",
+        "Calabazas rellenas en salsa de tomate",
+        "Carpaccio de betabel"
       ]
     }
   },
   "Saturday": {
-    "Breakfast": {
+    "Abre ojos": {
       "Main": [
-        "Mixed Fruit",
-        "Avocado Toast with Basil and Mint (With or Without Egg)",
-        "Persian Cucumbers with Lemon, Salt, Olive Oil"
+        "Fruta con yogurt, granola y miel orgánica",
+        "Café, té y jugo verde del huerto"
       ]
     },
-    "Lunch": {
+    "Desayuno": {
       "Main": [
-        "Cold Leek and Cucumber Soup",
-        "Mixed Salad",
-        "Two types of Tacos: Grilled Mushrooms / Garlic Shrimp",
-        "Rice, Beans",
-        "Avocado and Salsas"
-      ],
-      "Dessert": ["Vegan Chocolate Cookies"]
+        "Machacado de verduras con huevo",
+        "Quesadillas de flores",
+        "Avena con plátano, nuez y coco"
+      ]
     },
-    "Dinner": {
+    "Comida": {
       "Main": [
-        "White fish with Lemon & Capers",
-        "Asparagus Risotto",
-        "Sautéed Zucchini"
+        "Sopa de hongos",
+        "Tostada de flores",
+        "Mole de rosas",
+        "Arroz salvaje"
+      ]
+    },
+    "Cena": {
+      "Main": [
+        "Sopa de tortilla",
+        "Rollos de acelgas y setas",
+        "Ensalada del huerto"
       ]
     }
   },
   "Sunday": {
-    "Breakfast": {
+    "Abre ojos": {
       "Main": [
-        "Mixed Fruit",
-        "House Bread with Butter & Jam",
-        "Oatmeal Pancakes",
-        "Esponjaditas",
-        "Eggs"
+        "Fruta con yogurt, granola y miel orgánica",
+        "Café, té y jugo verde del huerto"
+      ]
+    },
+    "Desayuno": {
+      "Main": [
+        "Chilaquiles",
+        "Huevos al gusto",
+        "Pan con crema de cacahuate y plátano"
       ]
     }
   }
