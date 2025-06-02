@@ -13,13 +13,13 @@ const teamMembers: TeamMember[] = [
   {
     name: "Daniela Cervantes",
     role: "Meditation & Holistic Wellness",
-    bio: "Daniela brings a wealth of experience in holistic well-being, with certifications in Mindfulness Meditation and upcoming 200-hour Hatha Yoga Teacher Training. Her background in graphic design and studies in holistic nutrition allow her to create meaningful, visually captivating experiences that focus on the deep interconnection between mind and body.",
+    bio: "Daniela brings a wealth of experience and a deep passion for holistic well-being and visual arts. Having completed various courses in Mindfullness Meditation and Buddhism, Daniela sees the urge to focus on the deep interconnection between mind and body, achieving self-transformation through self-observation. She also holds a 200-hour Hatha Yoga and 50-hour Yin Yoga Teacher Training Certification.",
     image: "/daniela.jpg"
   },
   {
     name: "Isabella Van Heuven",
     role: "Yoga & Ayurvedic Coaching",
-    bio: "A student of life and nature lover, Isabella brings over 700 hours of yoga teacher training and expertise as an Ayurvedic and trauma-informed coach. Her multifaceted approach integrates holistic nutrition, mindfulness, and creative arts, reflecting her commitment to fostering holistic health and well-being.",
+    bio: "A student of life and nature lover, Isabella brings over 900 hours of yoga teacher training and expertise as an Ayurvedic and trauma-informed coach. Her multifaceted approach integrates holistic nutrition, mindfulness, and creative arts, reflecting her commitment to fostering holistic health and well-being.",
     image: "/bella.png"
   },
   {
