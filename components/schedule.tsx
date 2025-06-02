@@ -14,40 +14,42 @@ interface ScheduleData {
 }
 
 const scheduleData = {
-    "Thursday": [
-      { time: '17:00', activity: 'Arrival' },
-      { time: '17:30', activity: 'Early Dinner' },
-      { time: '19:00', activity: 'Candlelight Yoga / Welcome Circle' },
-      { time: '20:00', activity: 'Snack' }
-    ],
-    "Friday (Chakras: Root, Sacral, Solar Plexus)": [
-      { time: '06:30', activity: 'Meditation' },
-      { time: '07:00', activity: 'Yoga Class' },
-      { time: '09:00', activity: 'Breakfast, Journaling' },
-      { time: '12:00', activity: 'Sound Healing with optional Microdosing' },
-      { time: '14:30', activity: 'Lunch' },
-      { time: '17:00', activity: 'Artistic Yoga Class' },
-      { time: '19:00', activity: 'Dinner' }
-    ],
-    "Saturday (Chakras: Heart, Throat, Third Eye)": [
-      { time: '06:30', activity: 'Walking meditation' },
-      { time: '07:00', activity: 'Yoga Class' },
-      { time: '09:00', activity: 'Breakfast, Journaling' },
-      { time: '12:00', activity: 'Breathwork + Artistic Restoration' },
-      { time: '14:30', activity: 'Lunch' },
-      { time: '17:30', activity: 'Cacao Ceremony' },
-      { time: '19:00', activity: 'Ecstatic Dance' },
-      { time: '20:00', activity: 'Dinner' },
-      { time: '21:00', activity: 'Closing Ceremony' }
-    ],
-    "Sunday (Chakra: Crown)": [
-      { time: '06:30', activity: 'Meditation' },
-      { time: '07:00', activity: 'Restorative Yoga Class' },
-      { time: '09:00', activity: 'Breakfast, Journaling' },
-      { time: '12:00', activity: 'Departure' }
-    ]
-  }
-
+      "Thursday": [
+    { time: "2:00 PM", activity: "Llegada" },
+    { time: "3:00 PM", activity: "Comida de Bienvenida" },
+    { time: "4:30 PM", activity: "Recorrido por el Huerto" },
+    { time: "5:30 PM", activity: "Yoga – Vinyasa" },
+    { time: "7:30 PM", activity: "Cena" },
+    { time: "8:30 PM", activity: "Ceremonia de Cacao" }
+  ],
+  "Friday": [
+    { time: "7:00 AM", activity: "Hike" },
+    { time: "8:30 AM", activity: "Yoga – Power" },
+    { time: "10:00 AM", activity: "Desayuno" },
+    { time: "11:00 AM", activity: "Journaling: Roots to Reflection" },
+    { time: "12:00 PM", activity: "Downtime (Sukti, Kala, Abhyanga)" },
+    { time: "2:30 PM", activity: "Comida" },
+    { time: "5:30 PM", activity: "Yoga – Yin + Soundhealing" },
+    { time: "7:30 PM", activity: "Cena" }
+  ],
+  "Saturday": [
+    { time: "7:00 AM", activity: "Yoga – Power" },
+    { time: "9:30 AM", activity: "Desayuno" },
+    { time: "10:30 AM", activity: "Artistic Restoration" },
+    { time: "12:00 PM", activity: "Downtime (Sukti, Kala, Abhyanga)" },
+    { time: "2:30 PM", activity: "Comida" },
+    { time: "4:30 PM", activity: "Nature Immersion" },
+    { time: "6:00 PM", activity: "Yoga – Vinyasa" },
+    { time: "8:00 PM", activity: "Cena" },
+    { time: "9:00 PM", activity: "Círculo de Cierre" }
+  ],
+  "Sunday": [
+    { time: "7:00 AM", activity: "Hike" },
+    { time: "8:30 AM", activity: "Yoga – Slow Flow" },
+    { time: "10:00 AM", activity: "Desayuno" },
+    { time: "12:00 PM", activity: "Check-Out" }
+  ]
+}
 export function Schedule() {
   const [selectedDay, setSelectedDay] = useState('Thursday')
 
