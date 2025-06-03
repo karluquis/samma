@@ -7,7 +7,6 @@ import Link from "next/link"
 import { Schedule } from '@/components/schedule'
 import Image from 'next/image'
 import { GuestRoomSearch } from '@/components/guest-search'
-import { createClient } from '@supabase/supabase-js'
 import { BreathingSection } from '@/components/breathing-section'
 
 // Initialize Supabase client
