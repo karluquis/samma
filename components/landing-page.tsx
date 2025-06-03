@@ -9,9 +9,6 @@ import Image from 'next/image'
 import { GuestRoomSearch } from '@/components/guest-search'
 import { BreathingSection } from '@/components/breathing-section'
 
-// Initialize Supabase client
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
-
 
 export function LandingPageComponent() {
   const [attendeeName, setAttendeeName] = useState('')
@@ -30,20 +27,6 @@ export function LandingPageComponent() {
     }
   }, [])
 
-  const fetchGuestInfo = async (id: string) => {
-    const { data, error } = await supabase
-      .from('yoga_retreat_guests')
-      .select('guest_name, hotel_room')
-      .eq('guest_id', id)
-      .single();
-
-    if (error) {
-      console.error('Error fetching guest info:', error);
-    } else if (data) {
-      setAttendeeName(data.guest_name);
-      setAttendeeRoom(data.hotel_room);
-    }
-  }
 
   const handleGuestFound = (name: string, roomNumber: string) => {
     setAttendeeName(name);
