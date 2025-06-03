@@ -1,6 +1,5 @@
 import Link from "next/link"
 import Image from "next/image"
-import { PawPrint } from "lucide-react"
 
 export function Footer() {
   return (
@@ -17,13 +16,10 @@ export function Footer() {
             />
           </Link>
         </div>
-        
+
         <div className="flex flex-col items-center">
           <div className="flex items-center">
             <p className="text-sm opacity-80">© 2024 Samma</p>
-            <Link href="/ribbon" className="text-xs text-[#F5E6D3] opacity-50 hover:opacity-80 transition-opacity ml-2 flex items-center">
-              <PawPrint className="ml-1 text-xs" />
-            </Link>
           </div>
         </div>
       </div>
