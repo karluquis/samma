@@ -1,56 +1,73 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from "@/components/ui/button";
-import { createClient } from '@supabase/supabase-js';
+'use client'
 
-// Initialize Supabase client
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
+import React, { useState } from 'react'
+import { Button } from '@/components/ui/button'
 
 interface GuestInfo {
-  guest_name: string;
-  hotel_room: string;
+  guest_name: string
+  hotel_room: string
 }
 
+const guestList: GuestInfo[] = [
+  { guest_name: 'Paola Peralta', hotel_room: 'Habitación Salvia' },
+  { guest_name: 'Sofia Sanchez', hotel_room: 'Habitación Salvia' },
+  { guest_name: 'Ximena Sanchez', hotel_room: 'Habitación Salvia' },
+  { guest_name: 'Leila Muñoz', hotel_room: 'Habitación Romero' },
+  { guest_name: 'Pau Muñoz', hotel_room: 'Habitación Romero' },
+  { guest_name: 'Meli Cervantes', hotel_room: 'Habitación Romero' },
+  { guest_name: 'Alexandra Burillo', hotel_room: 'Habitación Lavanda' },
+  { guest_name: 'Isabel Gonzalez', hotel_room: 'Habitación Lavanda' },
+  { guest_name: 'Imelda Gonzalez', hotel_room: 'Habitación Lavanda' },
+  { guest_name: 'Fer Name', hotel_room: 'Habitación Cedrón' },
+  { guest_name: 'Alejandra Name (jr.)', hotel_room: 'Habitación Cedrón' },
+  { guest_name: 'Sofia Name', hotel_room: 'Habitación Cedrón' },
+  { guest_name: 'Alberto Jaber', hotel_room: 'Habitación Bungaló' },
+  { guest_name: 'Ana Rendon', hotel_room: 'Habitación Bungaló' },
+  { guest_name: 'Olivia Peralta', hotel_room: 'Habitación Cabaña' },
+  { guest_name: 'Gia Hidalgo', hotel_room: 'Habitación Cabaña' },
+  { guest_name: 'Paola Bucay', hotel_room: 'Habitación Cueva' },
+  { guest_name: 'Jacqueline Bettech', hotel_room: 'Habitación Cueva' },
+  { guest_name: 'Kevin Mishkin', hotel_room: 'Habitación King Size Cueva A' },
+  { guest_name: 'Alejandra Name', hotel_room: 'Habitación King Size Cueva B' },
+  { guest_name: 'Issac Askenazi', hotel_room: 'Habitación King Size Cueva D' },
+  { guest_name: 'Buge Peralta', hotel_room: 'Habitación King Size Cueva E' },
+  { guest_name: 'Santiago Vaca', hotel_room: 'Habitación King Size Cueva F' }
+]
+
 interface GuestRoomSearchProps {
-  onGuestFound: (name: string, roomNumber: string) => void;
+  onGuestFound: (name: string, roomNumber: string) => void
 }
 
 export function GuestRoomSearch({ onGuestFound }: GuestRoomSearchProps) {
-  const [inputName, setInputName] = useState('');
-  const [matchingGuests, setMatchingGuests] = useState<GuestInfo[]>([]);
+  const [inputName, setInputName] = useState('')
+  const [matchingGuests, setMatchingGuests] = useState<GuestInfo[]>([])
 
-  const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchTerm = e.target.value;
-    setInputName(searchTerm);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = e.target.value
+    setInputName(searchTerm)
 
     if (searchTerm.length > 0) {
-      const { data, error } = await supabase
-        .from('yoga_retreat_guests')
-        .select('guest_name, hotel_room')
-        .ilike('guest_name', `%${searchTerm}%`)
-        .limit(5);
-
-      if (error) {
-        console.error('Error fetching guests:', error);
-      } else {
-        setMatchingGuests(data || []);
-      }
+      const matches = guestList.filter((guest) =>
+        guest.guest_name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      setMatchingGuests(matches)
     } else {
-      setMatchingGuests([]);
+      setMatchingGuests([])
     }
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     if (matchingGuests.length === 1) {
-      const guest = matchingGuests[0];
-      onGuestFound(guest.guest_name, guest.hotel_room);
+      const guest = matchingGuests[0]
+      onGuestFound(guest.guest_name, guest.hotel_room)
     }
   }
 
   const handleGuestSelect = (guest: GuestInfo) => {
-    onGuestFound(guest.guest_name, guest.hotel_room);
-    setInputName(guest.guest_name);
-    setMatchingGuests([]);
+    onGuestFound(guest.guest_name, guest.hotel_room)
+    setInputName(guest.guest_name)
+    setMatchingGuests([])
   }
 
   return (
@@ -66,8 +83,8 @@ export function GuestRoomSearch({ onGuestFound }: GuestRoomSearchProps) {
         {matchingGuests.length > 0 && (
           <ul className="absolute z-10 w-full mt-1 bg-[#F5E6D3] text-[#8B4A3B] rounded shadow-lg">
             {matchingGuests.map((guest, index) => (
-              <li 
-                key={index} 
+              <li
+                key={index}
                 className="px-4 py-2 cursor-pointer hover:bg-[#8B4A3B] hover:text-[#F5E6D3]"
                 onClick={() => handleGuestSelect(guest)}
               >
@@ -81,5 +98,5 @@ export function GuestRoomSearch({ onGuestFound }: GuestRoomSearchProps) {
         See Your Room
       </Button>
     </form>
-  );
+  )
 }
