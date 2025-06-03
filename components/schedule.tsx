@@ -56,7 +56,7 @@ export function Schedule() {
   return (
     <section id="schedule" className="w-full py-20 bg-[#F5E6D3] text-[#8B4A3B]">
       <div className="container px-4 md:px-6 mx-auto">
-        <h2 className="text-3xl font-normal tracking-wide text-center mb-12">Amarte Retreat Schedule</h2>
+        <h2 className="text-3xl font-normal tracking-wide text-center mb-12">Enraizarte Retreat Schedule</h2>
         <div className="bg-[#8B4A3B] text-[#F5E6D3] p-6 rounded-lg shadow-lg">
           <div className="flex flex-wrap justify-center gap-2 mb-6">
             {Object.keys(scheduleData).map((day) => (
